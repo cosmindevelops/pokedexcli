@@ -1,7 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"time"
+
+	"github.com/cosmindevelops/pokedexcli/internal/pokeapi"
+)
+
+type config struct {
+	pokeapiClient           pokeapi.Client
+	nextLocationAreaURL     *string
+	previousLocationAreaURL *string
+	caughtPokemon           map[string]pokeapi.Pokemon
+}
 
 func main() {
-	fmt.Println("Hello world")
+	cfg := config{
+		pokeapiClient: pokeapi.NewClient(time.Hour),
+		caughtPokemon: make(map[string]pokeapi.Pokemon),
+	}
+
+	startRepl(&cfg)
 }
